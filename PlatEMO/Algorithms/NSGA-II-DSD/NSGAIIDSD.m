@@ -22,9 +22,11 @@ function NSGAIIDSD(Global)
     %% Generate random population
     Population = Global.Initialization();
     [~,FrontNo, CrowdDis, NeighDis] = Selection(Population, Global.N);
-
+    
     %% Optimization
     while Global.NotTermination(Population)
+        X = Population.decs;
+        
         MatingPool = TournamentSelectionNSP(2,Global.N,FrontNo,-CrowdDis, -NeighDis, nsp);
         Offspring  = GA(Population(MatingPool));
         [Population,FrontNo,CrowdDis, NeighDis] = Selection([Population,Offspring],Global.N);

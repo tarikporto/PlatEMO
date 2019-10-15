@@ -42,11 +42,11 @@ for n = 1:length(problem)
     EPF = zeros(100,M);
     PS = zeros(100,D);
     for i = 1:100
-        %PS(i,:) = result{2}(i).dec;
+        PS(i,:) = result{2}(i).dec;
         EPF(i,:) = result{2}(i).obj;
     end
     
-    TPF = GLOBAL('-problem',problem{n}).problem.PF(10000);
+    TPF = GLOBAL('-problem',@F1SYMPART).problem.PF(100);
     
     % gera EPF e TPF e salva como png
     if M == 2
