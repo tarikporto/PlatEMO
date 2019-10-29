@@ -25,8 +25,8 @@ function NSGAIIDSD(Global)
     
     %% Optimization
     while Global.NotTermination(Population)
-        X = Population.decs;
-        
+        %X = Population.decs;
+        %plot(X(:,1),X(:,2),'o');
         MatingPool = TournamentSelectionNSP(2,Global.N,FrontNo,-CrowdDis, -NeighDis, nsp);
         Offspring  = GA(Population(MatingPool));
         [Population,FrontNo,CrowdDis, NeighDis] = Selection([Population,Offspring],Global.N);

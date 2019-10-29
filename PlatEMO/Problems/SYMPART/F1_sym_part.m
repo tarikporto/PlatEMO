@@ -1,9 +1,10 @@
 function F1 = F1_sym_part(X, a, b, c)
 %SYM_PART Summary of this function goes here
 %   Detailed explanation goes here
+
     X1 = X(:,1);
     X2 = X(:,2);
-
+    
     t1_hat = sign(X1) .* ceil((abs(X1) - (a + c/2))/(2*a + c));
     t2_hat = sign(X2) .* ceil((abs(X2) - (b/2))/b);
 

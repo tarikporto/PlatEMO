@@ -18,7 +18,7 @@ function [Population,FrontNo,CrowdDis, NeighDis] = Selection(Population, N)
     %% Calculate the crowding distance of each solution
     CrowdDis = CrowdingDistance(Population.objs,FrontNo);
     
-    NeighDis = NeighborDistance(Population.decs',round(sqrt(size(Population.decs,1))));
+    NeighDis = NeighborDistance(Population.decs,floor(sqrt(size(Population.decs,1))));
     
     %% Select the solutions in the last front based on their crowding distances
     Last     = find(FrontNo==MaxFNo);

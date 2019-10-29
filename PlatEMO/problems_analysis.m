@@ -46,7 +46,7 @@ for n = 1:length(problem)
         EPF(i,:) = result{2}(i).obj;
     end
     
-    TPF = GLOBAL('-problem',@F1SYMPART).problem.PF(100);
+    TPF = GLOBAL('-problem',problem{n}).problem.PF(100);
     
     % gera EPF e TPF e salva como png
     if M == 2
