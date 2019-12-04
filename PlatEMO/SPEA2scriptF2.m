@@ -81,30 +81,55 @@ for nsp_config_index = 1:length(nsp_configs)
     IGD_sd(nsp_config_index,1) = std(IGD_all_runs);
     IGD_all(:,nsp_config_index) = IGD_all_runs;
 
+    if(nsp_config == 0.0)
+        CS_nsp_00 = CS_means;
+    end
+    
+    if(nsp_config == 0.5)
+        CS_nsp_05 = CS_means;
+    end
+    
+    if(nsp_config == 1)
+        CS_nsp_10 = CS_means;
+    end
+    
     plot(1:saved, CS_means);
     title('Subconjuntos por geração');
     ylabel('número de subconjuntos');
     xlabel('geração');
-    saveas(gcf, strcat('Figures/SPEA2DSD_f2_',num2str(nsp_config,'%1.1f'),'_clusters_per_generation.png'));
+    saveas(gcf, strcat('Figures/SPEA2DSD_f2_',strrep(num2str(nsp_config,'%1.1f'),'.',''),'_clusters_per_generation.png'));
 end
 
 boxplot(CS_final_all);
 title('Subconjuntos por delta - F2');
-xlabel('?');
+xlabel('delta');
 ylabel('número de subconjuntos');
 xticklabels({'0.0','0.1','0.2','0.3','0.4','0.5','0.6','0.7','0.8','0.9','1.0'});
 saveas(gcf, 'Figures/SPEA2DSD_f2_clusters_per_delta.png');
 
 boxplot(HV_all);
 title('Hypervolume por delta - F2');
-xlabel('?');
+xlabel('delta');
 ylabel('Hypervolume');
 xticklabels({'0.0','0.1','0.2','0.3','0.4','0.5','0.6','0.7','0.8','0.9','1.0'});
 saveas(gcf, 'Figures/SPEA2DSD_f2_hv_per_delta.png');
 
 boxplot(IGD_all);
 title('IGD por delta - F2');
-xlabel('?');
+xlabel('delta');
 ylabel('IGD');
 xticklabels({'0.0','0.1','0.2','0.3','0.4','0.5','0.6','0.7','0.8','0.9','1.0'});
 saveas(gcf, 'Figures/SPEA2DSD_f2_igd_per_delta.png');
+
+plot(1:saved, CS_nsp_00, 'blue');
+hold on
+plot(1:saved, CS_nsp_05, 'red');
+hold on
+plot(1:saved, CS_nsp_10, 'black');
+title('Subconjuntos por geração');
+ylabel('número de subconjuntos');
+xlabel('geração');
+lgd = legend('delta = 0.0','delta = 0.5','delta = 1.0');
+lgd.Location = 'southwest';
+saveas(gcf, strcat('Figures/SPEA2DSD_f2_resumo_clusters_per_generation.png'));
+hold off
